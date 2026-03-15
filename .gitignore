@@ -1,0 +1,10 @@
+venv/
+venv311/
+uploads/
+__pycache__/
+*.pyc
+Frontend/node_modules/
+*.log
+yolov8n.pt
+backend/.env
+Frontend/.env

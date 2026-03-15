@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+opencv-python
+pillow
+numpy
+scikit-image
+exifread
+piexif
+spacy
+nltk
+yara-python
+binwalk
+requests
+python-dotenv
+ultralytics
+transformers
+httpx
