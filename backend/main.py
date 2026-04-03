@@ -73,6 +73,9 @@ async def analyze(file: UploadFile = File(...)) -> dict:
     try:
         result = await run_full_analysis(stored_path, file.filename)
     except Exception as exc:
+        import traceback
+        print(f"Error during analysis: {exc}")
+        print(traceback.format_exc())
         raise HTTPException(status_code=500, detail=f"Analysis failed: {exc}") from exc
 
     return result

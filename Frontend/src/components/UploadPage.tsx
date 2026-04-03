@@ -8,21 +8,39 @@ interface UploadPageProps {
   onNavigateToHome: () => void;
 }
 
+// Full response shape from backend
 interface AnalyzeResponse {
-  objects: Array<Record<string, unknown>>;
-  text: string[];
-  scene: string;
-  caption: string;
-  perspectives: {
-    agent: Record<string, unknown>;
-    detective: Record<string, unknown>;
-    user: Record<string, unknown>;
+  // nested analysis modules
+  image_info?: { filename?: string; size_bytes?: number };
+  visual_analysis?: {
+    objects?: Array<Record<string, unknown>>;
+    caption?: string;
+    scene?: string;
+    ocr_text?: string[];
+    local_models?: { yolo_used?: boolean; blip_used?: boolean };
+    external_apis?: { hf_detr_used?: boolean; ocr_space_used?: boolean; warnings?: string[] };
   };
+  forensic_analysis?: Record<string, unknown>;
+  steganography_analysis?: Record<string, unknown>;
+  malware_scan?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
+  pattern_analysis?: Record<string, unknown>;
+  nlp_summary?: Record<string, unknown>;
+  perspectives?: {
+    agent?: unknown;
+    detective?: unknown;
+    user?: unknown;
+  };
+  // flat compat fields
+  objects?: Array<Record<string, unknown>>;
+  text?: string[];
+  scene?: string;
+  caption?: string;
   api_warnings?: Array<{ source: string; message: string }>;
 }
 
 export function UploadPage({ onNavigateToHome }: UploadPageProps) {
-  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefined) || "http://localhost:8001";
+  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefined) || "http://localhost:8000";
   const [hasUploadedImage, setHasUploadedImage] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState<AnalyzeResponse | null>(null);
@@ -87,7 +105,8 @@ export function UploadPage({ onNavigateToHome }: UploadPageProps) {
     return (
       <ProcessedImageScreen
         onNewAnalysis={handleNewAnalysis}
-        analysisResult={result}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        analysisResult={result as any}
         imageUrl={imageUrl}
       />
     );

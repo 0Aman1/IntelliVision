@@ -1,10 +1,45 @@
+# Virtual Environments
 venv/
 venv311/
-uploads/
+env/
+.venv/
+
+# Python Cache
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Node
 Frontend/node_modules/
-*.log
+Frontend/dist/
+npm-debug.log
+
+# Environment Files
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Large Model Files
+*.pt
+*.pth
 yolov8n.pt
-backend/.env
-Frontend/.env
+
+# Uploads & Temp
+uploads/
+temp/
+tmp/
+*.log
+
+# Interview Preparation (Personal)
+TCS_Interview_Preparation/
+
+# OS
+.DS_Store
+Thumbs.db

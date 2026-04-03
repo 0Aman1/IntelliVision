@@ -23,7 +23,7 @@ async def run_full_analysis(image_path: Path, original_filename: str) -> dict[st
     metadata = analyze_metadata(image_path)
     visual_analysis = await analyze_visual_content(image_path)
     forensic_analysis = analyze_forensic_signals(image_path)
-    steganography_analysis = analyze_steganography(image_path)
+    steganography_analysis = analyze_steganography(image_path, original_filename=original_filename)
     malware_scan = analyze_malware_signatures(image_path)
     pattern_analysis = analyze_patterns(image_path)
 
